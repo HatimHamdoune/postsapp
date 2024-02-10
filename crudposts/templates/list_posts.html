@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of Posts</title>
+</head>
+<body>
+    <h1>List of Posts</h1>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <strong>User ID:</strong> {{ post.userId }}<br>
+                <strong>Post ID:</strong> {{ post.id }}<br>
+                <strong>Title:</strong> <a href="./posts/{{ post.id }}"> {{ post.title }} </a><br>
+                <strong>Body:</strong> {{ post.body }}<br>
+                <strong>Word Count:</strong> {{ post.body|wordcount }}<br>
+
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
