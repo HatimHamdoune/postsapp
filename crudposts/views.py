@@ -1,15 +1,7 @@
 import requests
 from django.shortcuts import render
 from django.core.paginator import Paginator
-
-def list_posts(request):
-    api_url = 'http://jsonplaceholder.typicode.com/posts'
-    users_url = 'http://jsonplaceholder.typicode.com/users'
-    response = requests.get(api_url)
-    users_response = requests.get(users_url)
-    posts = response.json()
-    users = users_response.json
-    return render(request, 'list_posts.html', {'posts': posts, 'users': users})
+from django.http import HttpResponse
 
 def post_detail(request, post_id):
     api_url = f'http://jsonplaceholder.typicode.com/posts/{post_id}'
@@ -29,9 +21,12 @@ def paginate_posts(request):
     users_response = requests.get(users_url)
     posts = response.json()
     users = users_response.json()
-    paginator = Paginator(posts, 10)  # 10 posts per page
+    items_per_page = 10
+    paginator = Paginator(posts, items_per_page)
+    total_items = paginator.count
+    total_pages = total_items // items_per_page
     page = paginator.get_page(page_number)
-    return render(request, 'list_posts.html', {'posts': page, 'users': users})
+    return render(request, 'list_posts.html', {'posts': page, 'users': users, 'total_pages': list(range(1, total_pages + 1))})
 
 def search_posts(request):
     query = request.GET.get('q', '')
