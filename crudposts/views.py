@@ -3,9 +3,12 @@ from django.shortcuts import render
 
 def list_posts(request):
     api_url = 'http://jsonplaceholder.typicode.com/posts'
+    users_url = 'http://jsonplaceholder.typicode.com/users'
     response = requests.get(api_url)
+    users_response = requests.get(users_url)
     posts = response.json()
-    return render(request, 'list_posts.html', {'posts': posts})
+    users = users_response.json
+    return render(request, 'list_posts.html', {'posts': posts, 'users': users})
 
 def post_detail(request, post_id):
     api_url = f'http://jsonplaceholder.typicode.com/posts/{post_id}'
@@ -19,11 +22,14 @@ def post_detail(request, post_id):
 
 def paginate_posts(request, page_number):
     api_url = 'http://jsonplaceholder.typicode.com/posts'
+    users_url = 'http://jsonplaceholder.typicode.com/users'
     response = requests.get(api_url)
+    users_response = requests.get(users_url)
     posts = response.json()
+    users = users_response.json
     paginator = Paginator(posts, 10)  # 10 posts per page
     page = paginator.get_page(page_number)
-    return render(request, 'list_posts.html', {'posts': page})
+    return render(request, 'list_posts.html', {'posts': page, 'users': users})
 
 def search_posts(request):
     query = request.GET.get('q', '')

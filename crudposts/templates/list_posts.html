@@ -2,19 +2,25 @@
 <html>
 <head>
     <title>List of Posts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1>List of Posts</h1>
+
+    <h1 class="text-3xl font-bold underline">List of Posts</h1>
     <ul>
         {% for post in posts %}
             <li>
-                <strong>User ID:</strong> {{ post.userId }}<br>
-                <strong>Post ID:</strong> {{ post.id }}<br>
-                <strong>Title:</strong> <a href="./posts/{{ post.id }}"> {{ post.title }} </a><br>
-                <strong>Body:</strong> {{ post.body }}<br>
+                {% for user in users %}
+                    {% if user.id == post.userId %}
+                        <strong>User:</strong>  {{ user.name  }}<br>
+                    {% endif %}
+                {% endfor %}
+                <strong>Post {{ post.id }}: </strong> <a class="sky-500 hover:sky-700" href="./posts/{{ post.id }}"> {{ post.title }} </a><br>
+                <strong> {{ post.body }} </strong> <br>
                 <strong>Word Count:</strong> {{ post.body|wordcount }}<br>
 
             </li>
+            <br>
         {% endfor %}
     </ul>
 </body>

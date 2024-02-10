@@ -2,17 +2,21 @@
 <html>
 <head>
     <title>{{ post.title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <h1>{{ post.title }}</h1>
     <p><strong>Body:</strong> {{ post.body }}</p>
+    <br>
+    <br>
     <h2>Comments:</h2>
     <ul>
         {% for comment in comments %}
             <li>
-                <strong>Name:</strong> {{ comment.name }}<br>
+                <strong> {{ comment.name }} </strong><br>
                 <strong>Email:</strong> {{ comment.email }}<br>
                 <strong>Body:</strong> {{ comment.body }}<br>
+                <br>
             </li>
         {% endfor %}
     </ul>
