@@ -5,21 +5,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1>{{ post.title }}</h1>
-    <p><strong>Body:</strong> {{ post.body }}</p>
+    <h1 class="mb-4 text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">{{ post.title }}</h1>
+    <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"> {{ post.body }}</p>
     <br>
     <br>
-    <h2>Comments:</h2>
-    <ul>
+    <div class="antialiased mx-auto max-w-screen-sm">
+      <h3 class="mb-4 text-lg font-semibold text-gray-900">Comments</h3>
+        <ul>
         {% for comment in comments %}
-            <li>
-                <strong> {{ comment.name }} </strong><br>
-                <strong>Email:</strong> {{ comment.email }}<br>
-                <strong>Body:</strong> {{ comment.body }}<br>
-                <br>
-            </li>
+              <div class="space-y-4">
+                <div class="flex">
+                  <div class="flex-shrink-0 mr-3">
+                    <img class="mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10" src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="">
+                  </div>
+                  <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
+                      <strong>{{ comment.name }}</strong> <span class="text-xs text-gray-400">{{ comment.email }}</span>
+                    <p class="text-sm">{{ comment.body }}</p>
+                  </div>
+                </div>
+              </div>
+              <br>
         {% endfor %}
-    </ul>
+        </ul>
+
+    </div>
 </body>
 </html
 
