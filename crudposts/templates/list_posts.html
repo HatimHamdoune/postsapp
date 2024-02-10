@@ -5,23 +5,37 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-
-    <h1 class="text-3xl font-bold underline">List of Posts</h1>
+<nav class="font-sans flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-4 px-6 bg-white shadow sm:items-baseline w-full">
+  <div class="mb-2 sm:mb-0">
+    <a href="/" class="text-2xl no-underline text-grey-darkest hover:text-blue-dark">Posts</a>
+  </div>
+  <div>
+    <a href="/search" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">Search</a>
+  </div>
+</nav>
     <ul>
         {% for post in posts %}
-            <li>
-                {% for user in users %}
-                    {% if user.id == post.userId %}
-                        <strong>User:</strong>  {{ user.name  }}<br>
-                    {% endif %}
-                {% endfor %}
-                <strong>Post {{ post.id }}: </strong> <a class="sky-500 hover:sky-700" href="./posts/{{ post.id }}"> {{ post.title }} </a><br>
-                <strong> {{ post.body }} </strong> <br>
-                <strong>Word Count:</strong> {{ post.body|wordcount }}<br>
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+          <div class="md:flex">
+          {% for user in users %}
+            {% if user.id == post.userId %}
+            <div class="md:shrink-0">
+              <img class="h-48 w-full object-cover md:h-full md:w-48" src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="Modern building architecture">
+            </div>
+            <div class="p-8">
 
-            </li>
-            <br>
+                <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{ user.name }}</div>
+            {% endif %}
+          {% endfor %}
+              <a href="/posts/{{ post.id }}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Post {{ post.id }}:  {{ post.title }} </a>
+
+              <p class="mt-2 text-slate-500">{{ post.body }}</p>
+                <strong>Word Count:</strong> {{ post.body|wordcount }}<br>
+            </div>
+          </div>
+        </div>
         {% endfor %}
+        <br>
     </ul>
 </body>
 </html>
